@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var recordButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         //Enter code to be run RIGHT before view appears (show/hide)
         stopButton.hidden = true
+        recordButton.enabled = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,6 +34,7 @@ class ViewController: UIViewController {
         // TODO: Show text "recording in progress"
         recordingInProgress.hidden = false
         stopButton.hidden = false
+        recordButton.enabled = false
         // TODO: Record the user's voice
         println("in recordAudio")
     }
@@ -39,6 +42,7 @@ class ViewController: UIViewController {
     @IBAction func doneRecording(sender: UIButton) {
         // TODO: Hide "recording in progress"
         recordingInProgress.hidden = true
+        recordButton.enabled = true
         // TODO: Save and store Recorded audio
         println("done recording\n")
     }
