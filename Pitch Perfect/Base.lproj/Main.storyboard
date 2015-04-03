@@ -2,9 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vSo-f4-R22">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Record-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Pitch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,6 +39,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doneRecording:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kri-Vw-x5i"/>
+                                    <segue destination="AEa-Oa-GRh" kind="show" id="PXt-3s-VVo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -81,7 +83,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="t9C-KL-Yd3"/>
+                    <navigationItem key="navigationItem" title="Record" id="t9C-KL-Yd3"/>
                     <connections>
                         <outlet property="RecordingInProgress" destination="rSm-sH-xlv" id="Upj-rk-KMg"/>
                         <outlet property="recordButton" destination="ruY-Ie-4Ie" id="eKd-pO-Qaa"/>
@@ -92,6 +94,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1173" y="377"/>
+        </scene>
+        <!--Play Sounds View Controller-->
+        <scene sceneID="kyt-fc-uK2">
+            <objects>
+                <viewController id="AEa-Oa-GRh" customClass="PlaySoundsViewController" customModule="Pitch_Perfect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tMj-4W-jIx"/>
+                        <viewControllerLayoutGuide type="bottom" id="hIT-h6-ezb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iLm-oe-Pvx">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5y-d9-wKE">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="Slow">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playSlowAudio:" destination="AEa-Oa-GRh" eventType="touchUpInside" id="y1b-6Z-14e"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f5y-d9-wKE" firstAttribute="top" secondItem="tMj-4W-jIx" secondAttribute="bottom" constant="52" id="iP0-Zl-ApO"/>
+                            <constraint firstItem="f5y-d9-wKE" firstAttribute="leading" secondItem="iLm-oe-Pvx" secondAttribute="leadingMargin" constant="40" id="ijc-hX-rdG"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="f5y-d9-wKE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="iP0-Zl-ApO"/>
+                                <exclude reference="ijc-hX-rdG"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="f5y-d9-wKE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="iP0-Zl-ApO"/>
+                                <include reference="ijc-hX-rdG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUB-2c-wVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2032.5" y="377"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WJi-2r-TKx">
@@ -114,6 +166,7 @@
     </scenes>
     <resources>
         <image name="Image" width="100" height="100"/>
+        <image name="Slow" width="100" height="100"/>
         <image name="Stop" width="50" height="50"/>
     </resources>
 </document>
