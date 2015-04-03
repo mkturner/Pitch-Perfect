@@ -25,7 +25,7 @@
                                     <action selector="recordAudio:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aJx-W7-O8I"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-sH-xlv">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-sH-xlv">
                                 <rect key="frame" x="267" y="369" width="67" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.066666666666666666" green="0.28235294117647058" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,12 +59,12 @@
                                 <exclude reference="Wxu-ZA-WVJ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="I4L-fc-1YJ"/>
-                                <exclude reference="gEH-1N-2pF"/>
-                                <exclude reference="jrd-Ks-CDX"/>
                                 <exclude reference="X3H-h9-AfH"/>
                                 <exclude reference="nTY-2s-bvH"/>
                                 <exclude reference="rLs-Kn-HfW"/>
+                                <exclude reference="I4L-fc-1YJ"/>
+                                <exclude reference="gEH-1N-2pF"/>
+                                <exclude reference="jrd-Ks-CDX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -72,18 +72,19 @@
                                 <include reference="Wxu-ZA-WVJ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="I4L-fc-1YJ"/>
-                                <include reference="gEH-1N-2pF"/>
-                                <include reference="jrd-Ks-CDX"/>
                                 <include reference="X3H-h9-AfH"/>
                                 <include reference="nTY-2s-bvH"/>
                                 <include reference="rLs-Kn-HfW"/>
+                                <include reference="I4L-fc-1YJ"/>
+                                <include reference="gEH-1N-2pF"/>
+                                <include reference="jrd-Ks-CDX"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="RecordingInProgress" destination="rSm-sH-xlv" id="Upj-rk-KMg"/>
                         <outlet property="recordingInProgress" destination="rSm-sH-xlv" id="wPR-G4-5Ae"/>
+                        <outlet property="stopButton" destination="Wxu-ZA-WVJ" id="xha-df-Q5F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
