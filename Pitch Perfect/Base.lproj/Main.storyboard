@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vSo-f4-R22">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +40,7 @@
                                 </state>
                                 <connections>
                                     <action selector="doneRecording:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kri-Vw-x5i"/>
-                                    <segue destination="AEa-Oa-GRh" kind="show" id="PXt-3s-VVo"/>
+                                    <segue destination="AEa-Oa-GRh" kind="show" identifier="stopRecording" id="uak-s7-471"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -104,6 +105,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hIT-h6-ezb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iLm-oe-Pvx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5y-d9-wKE">
@@ -150,12 +152,12 @@
                                 <exclude reference="cmo-Wr-uCy"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="iP0-Zl-ApO"/>
-                                <exclude reference="ijc-hX-rdG"/>
+                                <exclude reference="i9d-li-E6g"/>
                                 <exclude reference="Xbt-YM-rsI"/>
                                 <exclude reference="wkC-xw-ZO9"/>
                                 <exclude reference="UMc-aJ-wdo"/>
-                                <exclude reference="i9d-li-E6g"/>
+                                <exclude reference="iP0-Zl-ApO"/>
+                                <exclude reference="ijc-hX-rdG"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -165,12 +167,12 @@
                                 <include reference="cmo-Wr-uCy"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="iP0-Zl-ApO"/>
-                                <include reference="ijc-hX-rdG"/>
+                                <include reference="i9d-li-E6g"/>
                                 <include reference="Xbt-YM-rsI"/>
                                 <include reference="wkC-xw-ZO9"/>
                                 <include reference="UMc-aJ-wdo"/>
-                                <include reference="i9d-li-E6g"/>
+                                <include reference="iP0-Zl-ApO"/>
+                                <include reference="ijc-hX-rdG"/>
                             </mask>
                         </variation>
                     </view>
