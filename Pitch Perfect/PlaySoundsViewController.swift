@@ -14,6 +14,7 @@ class PlaySoundsViewController: UIViewController {
     var audioPlayer: AVAudioPlayer!
     var receivedAudio: RecordedAudio!
     var audioEngine: AVAudioEngine!
+    var audioFile: AVAudioFile!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,12 @@ class PlaySoundsViewController: UIViewController {
 //        }
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
         audioPlayer.enableRate = true
-
+        
+        //create instance of AVAudioEngine, for sound processing
         audioEngine = AVAudioEngine()
+        
+        //convert NSURL to AVAudioFile for chipmunk function
+        audioFile = AVAudioFile(forReading: receivedAudio.filePathURL, error: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +73,13 @@ class PlaySoundsViewController: UIViewController {
         playAudioWithVariablePitch(1000)
     }
     
+    @IBAction func playDarthVaderAudio(sender: UIButton) {
+        /*code reuse: using playAudioWithVariablePitch again,
+            this time to lower pitch
+        */
+        playAudioWithVariablePitch(-1000)
+    }
+    
     func playAudioWithVariablePitch(pitch: Float) {
         // stop any audioPlayer(s) or audioEngine(s) currently running
         audioPlayer.stop()
@@ -94,7 +106,10 @@ class PlaySoundsViewController: UIViewController {
         //connect AVAudioUnitTimePitch to Output
         audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
         
-        
+        //play the audio
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        audioEngine.startAndReturnError(nil)
+        audioPlayerNode.play()
         
     }
     
