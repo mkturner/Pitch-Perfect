@@ -20,11 +20,7 @@ class PlaySoundsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        if var filePath = NSBundle.mainBundle().pathForResource("movie_quote", ofType: "mp3"){
-//            var filePathURL = NSURL(fileURLWithPath: filePath)
-//                    } else {
-//            println("empty filepath")
-//        }
+
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
         audioPlayer.enableRate = true
         
@@ -53,6 +49,7 @@ class PlaySoundsViewController: UIViewController {
 
     @IBAction func playFastAudio(sender: UIButton) {
         audioPlayer.stop()
+        prepareAudioEngine()
         audioPlayer.rate = 1.5
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
@@ -62,6 +59,7 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playSlowAudio(sender: UIButton) {
         // play audio slooowly here.
         audioPlayer.stop()
+        prepareAudioEngine()
         audioPlayer.rate = 0.5
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
@@ -83,8 +81,7 @@ class PlaySoundsViewController: UIViewController {
     func playAudioWithVariablePitch(pitch: Float) {
         // stop any audioPlayer(s) or audioEngine(s) currently running
         audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        prepareAudioEngine()
         
         /* create object for AVAudioPlayerNode,
             attach to AVAudioEngine
@@ -111,6 +108,14 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.startAndReturnError(nil)
         audioPlayerNode.play()
         
+    }
+
+    func prepareAudioEngine(){
+        /*prepare audio engine for playback,
+            avoid overlapping of payback effects
+        */
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     @IBAction func stopAudio(sender: UIButton) {
