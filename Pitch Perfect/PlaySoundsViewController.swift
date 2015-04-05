@@ -13,6 +13,7 @@ class PlaySoundsViewController: UIViewController {
 
     var audioPlayer: AVAudioPlayer!
     var receivedAudio: RecordedAudio!
+    var audioEngine: AVAudioEngine!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
         audioPlayer.enableRate = true
 
-        
+        audioEngine = AVAudioEngine()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +61,41 @@ class PlaySoundsViewController: UIViewController {
         audioPlayer.currentTime = 0.0
         audioPlayer.play()
         println("started playing audio slowly")
+    }
+    
+    @IBAction func playChipmunkAudio(sender: UIButton) {
+        // use custom function to modify pitch
+        playAudioWithVariablePitch(1000)
+    }
+    
+    func playAudioWithVariablePitch(pitch: Float) {
+        // stop any audioPlayer(s) or audioEngine(s) currently running
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        /* create object for AVAudioPlayerNode,
+            attach to AVAudioEngine
+        */
+        var audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        /* create object for AVAudioUnitTimePitch,
+            use it to change pitch,
+            attach it to AVAudioEngine
+        */
+        var changePitchEffect = AVAudioUnitTimePitch()
+        changePitchEffect.pitch = pitch
+        audioEngine.attachNode(changePitchEffect)
+        
+        //connect AVAudioPlayerNode to AVAudioUnitTimePitch
+        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
+        
+        //connect AVAudioUnitTimePitch to Output
+        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        
+        
+        
     }
     
     @IBAction func stopAudio(sender: UIButton) {

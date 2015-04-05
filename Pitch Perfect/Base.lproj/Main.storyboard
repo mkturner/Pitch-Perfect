@@ -135,11 +135,22 @@
                                     <action selector="stopAudio:" destination="AEa-Oa-GRh" eventType="touchUpInside" id="ql3-2z-Hv7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXQ-8M-bRj">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" image="Chipmunk">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playChipmunkAudio:" destination="AEa-Oa-GRh" eventType="touchUpInside" id="JMp-AR-7Z3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="cmo-Wr-uCy" secondAttribute="centerX" id="UMc-aJ-wdo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Oy0-Jx-XVV" secondAttribute="trailing" constant="20" id="Xbt-YM-rsI"/>
+                            <constraint firstItem="fXQ-8M-bRj" firstAttribute="top" secondItem="f5y-d9-wKE" secondAttribute="bottom" constant="100" id="d8t-ug-Z2g"/>
+                            <constraint firstItem="fXQ-8M-bRj" firstAttribute="leading" secondItem="iLm-oe-Pvx" secondAttribute="leadingMargin" constant="20" id="fio-P9-w9k"/>
                             <constraint firstItem="hIT-h6-ezb" firstAttribute="top" secondItem="cmo-Wr-uCy" secondAttribute="bottom" constant="40" id="i9d-li-E6g"/>
                             <constraint firstItem="f5y-d9-wKE" firstAttribute="top" secondItem="tMj-4W-jIx" secondAttribute="bottom" constant="52" id="iP0-Zl-ApO"/>
                             <constraint firstItem="f5y-d9-wKE" firstAttribute="leading" secondItem="iLm-oe-Pvx" secondAttribute="leadingMargin" constant="20" id="ijc-hX-rdG"/>
@@ -150,14 +161,17 @@
                                 <exclude reference="f5y-d9-wKE"/>
                                 <exclude reference="Oy0-Jx-XVV"/>
                                 <exclude reference="cmo-Wr-uCy"/>
+                                <exclude reference="fXQ-8M-bRj"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="i9d-li-E6g"/>
-                                <exclude reference="Xbt-YM-rsI"/>
-                                <exclude reference="wkC-xw-ZO9"/>
-                                <exclude reference="UMc-aJ-wdo"/>
                                 <exclude reference="iP0-Zl-ApO"/>
                                 <exclude reference="ijc-hX-rdG"/>
+                                <exclude reference="Xbt-YM-rsI"/>
+                                <exclude reference="wkC-xw-ZO9"/>
+                                <exclude reference="d8t-ug-Z2g"/>
+                                <exclude reference="fio-P9-w9k"/>
+                                <exclude reference="UMc-aJ-wdo"/>
+                                <exclude reference="i9d-li-E6g"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -165,14 +179,17 @@
                                 <include reference="f5y-d9-wKE"/>
                                 <include reference="Oy0-Jx-XVV"/>
                                 <include reference="cmo-Wr-uCy"/>
+                                <include reference="fXQ-8M-bRj"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="i9d-li-E6g"/>
-                                <include reference="Xbt-YM-rsI"/>
-                                <include reference="wkC-xw-ZO9"/>
-                                <include reference="UMc-aJ-wdo"/>
                                 <include reference="iP0-Zl-ApO"/>
                                 <include reference="ijc-hX-rdG"/>
+                                <include reference="Xbt-YM-rsI"/>
+                                <include reference="wkC-xw-ZO9"/>
+                                <include reference="d8t-ug-Z2g"/>
+                                <include reference="fio-P9-w9k"/>
+                                <include reference="UMc-aJ-wdo"/>
+                                <include reference="i9d-li-E6g"/>
                             </mask>
                         </variation>
                     </view>
@@ -201,6 +218,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Chipmunk" width="100" height="100"/>
         <image name="Image" width="100" height="100"/>
         <image name="Slow" width="100" height="100"/>
         <image name="Stop" width="50" height="50"/>
