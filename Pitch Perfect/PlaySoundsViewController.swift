@@ -21,8 +21,8 @@ class PlaySoundsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
-        audioPlayer.enableRate = true
+//        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathURL, error: nil)
+//        audioPlayer.enableRate = true
         
         //create instance of AVAudioEngine, for sound processing
         audioEngine = AVAudioEngine()
@@ -35,52 +35,44 @@ class PlaySoundsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func playFastAudio(sender: UIButton) {
-        audioPlayer.stop()
-        prepareAudioEngine()
-        audioPlayer.rate = 1.5
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
-        println("started playing audio fastly")
+        playAudioWithEffect(speed: 1.5)
+        print(" fastly\n")
     }
     
     @IBAction func playSlowAudio(sender: UIButton) {
         // play audio slooowly here.
-        audioPlayer.stop()
-        prepareAudioEngine()
-        audioPlayer.rate = 0.5
-        audioPlayer.currentTime = 0.0
-        audioPlayer.play()
-        println("started playing audio slowly")
+        playAudioWithEffect(speed: 0.5)
+        print(" slowly\n")
     }
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
         // use custom function to modify pitch
-        playAudioWithVariablePitch(1000)
+        playAudioWithEffect(pitch: 1000)
+        println("chipmunk")
     }
     
     @IBAction func playDarthVaderAudio(sender: UIButton) {
         /*code reuse: using playAudioWithVariablePitch again,
             this time to lower pitch
         */
-        playAudioWithVariablePitch(-1000)
+        playAudioWithEffect(pitch: -1000)
+        println("vader")
     }
     
-    func playAudioWithVariablePitch(pitch: Float) {
+    @IBAction func playWithEcho(sender: UIButton) {
+        playAudioWithEffect(echo: true)
+        println("echo")
+    }
+    
+    @IBAction func playWithReverb(sender: UIButton) {
+        playAudioWithEffect(reverb: true)
+        println("reverb")
+    }
+    
+    func playAudioWithEffect(pitch: Float = 1.0, speed: Float = 1.0, echo: Bool = false, reverb: Bool = false) {
         // stop any audioPlayer(s) or audioEngine(s) currently running
-        audioPlayer.stop()
         prepareAudioEngine()
         
         /* create object for AVAudioPlayerNode,
@@ -90,18 +82,51 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.attachNode(audioPlayerNode)
         
         /* create object for AVAudioUnitTimePitch,
-            use it to change pitch,
+            use it to change pitch or speed,
             attach it to AVAudioEngine
         */
         var changePitchEffect = AVAudioUnitTimePitch()
         changePitchEffect.pitch = pitch
+        changePitchEffect.rate = speed
         audioEngine.attachNode(changePitchEffect)
         
-        //connect AVAudioPlayerNode to AVAudioUnitTimePitch
-        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
+        /*create Objects for AVAudioUnitDistortion (for Echo) 
+            & AVAudioUnitReverb (for Reverb)
+        */
+        var distortEffect = AVAudioUnitDistortion()
+        distortEffect.loadFactoryPreset(AVAudioUnitDistortionPreset.MultiEcho1)
+        audioEngine.attachNode(distortEffect)
         
-        //connect AVAudioUnitTimePitch to Output
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        var reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(AVAudioUnitReverbPreset.SmallRoom)
+        reverbEffect.wetDryMix = 33.3
+        audioEngine.attachNode(reverbEffect)
+    
+        if (echo) {
+            // Connect AVAudioUnitDistortion
+            //connect AVAudioPlayerNode to AVAudioUnitDistortion
+            audioEngine.connect(audioPlayerNode, to: distortEffect, format: nil)
+            
+            //connect AVAudioUnitTimePitch to Output
+            audioEngine.connect(distortEffect, to: audioEngine.outputNode, format: nil)
+
+        } else if (reverb) {
+            // Connect AVAudioUnitReverb
+            //connect AVAudioPlayerNode to AVAudioUnitTimePitch
+            audioEngine.connect(audioPlayerNode, to: reverbEffect, format: nil)
+            
+            //connect AVAudioUnitTimePitch to Output
+            audioEngine.connect(reverbEffect, to: audioEngine.outputNode, format: nil)
+
+        } else {
+        
+            //connect AVAudioPlayerNode to AVAudioUnitTimePitch
+            audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
+            
+            //connect AVAudioUnitTimePitch to Output
+            audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        
+        }
         
         //play the audio
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
@@ -120,7 +145,7 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func stopAudio(sender: UIButton) {
         // stop playing audio
-        audioPlayer.stop()
+        prepareAudioEngine()
         println("stopped playing audio\n")
     }
     

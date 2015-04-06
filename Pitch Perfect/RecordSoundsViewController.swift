@@ -17,6 +17,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var tapToRecord: UILabel!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var resumeButton: UIButton!
     
     //create object for the recorder
     var audioRecorder:AVAudioRecorder!
@@ -33,6 +35,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         //Enter code to be run RIGHT before view appears (show/hide)
         tapToRecord.hidden = false
         stopButton.hidden = true
+        pauseButton.hidden = true
+        resumeButton.hidden = true
         recordButton.enabled = true
     }
 
@@ -48,6 +52,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         // Show text "recording in progress"
         recordingInProgress.hidden = false
         stopButton.hidden = false
+        pauseButton.hidden = false
+        pauseButton.enabled = true
+        resumeButton.hidden = false
+        resumeButton.enabled = false
         recordButton.enabled = false
         
         // print info to console, tell what's happening
@@ -81,6 +89,18 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
         
         
+    }
+    
+    @IBAction func pauseAudio(sender: UIButton) {
+        audioRecorder.pause()
+        resumeButton.enabled = true
+        pauseButton.enabled = false
+    }
+    
+    @IBAction func resumeAudio(sender: UIButton) {
+        audioRecorder.record()
+        pauseButton.enabled = true
+        resumeButton.enabled = false
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
